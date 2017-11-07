@@ -31,6 +31,10 @@ public class SlantedTextView extends View {
     public static final int MODE_LEFT_BOTTOM_TRIANGLE = 6;
     public static final int MODE_RIGHT_BOTTOM_TRIANGLE = 7;
 
+    //立体tag
+    public static final int MODE_LEFT_OUT = 8;
+    private float mOutLength = 4;
+
     public static final int ROTATE_ANGLE = 45;
     private Paint mPaint;
     private TextPaint mTextPaint;
@@ -66,6 +70,7 @@ public class SlantedTextView extends View {
         mTextSize = array.getDimension(R.styleable.SlantedTextView_slantedTextSize, mTextSize);
         mTextColor = array.getColor(R.styleable.SlantedTextView_slantedTextColor, mTextColor);
         mSlantedLength = array.getDimension(R.styleable.SlantedTextView_slantedLength, mSlantedLength);
+        mOutLength = array.getDimension(R.styleable.SlantedTextView_slantedOutLength, mOutLength);
         mSlantedBackgroundColor = array.getColor(R.styleable.SlantedTextView_slantedBackgroundColor, mSlantedBackgroundColor);
 
         if (array.hasValue(R.styleable.SlantedTextView_slantedText)) {
@@ -129,10 +134,33 @@ public class SlantedTextView extends View {
             case MODE_RIGHT_BOTTOM_TRIANGLE:
                 path = getModeRightBottomTrianglePath(path, w, h);
                 break;
+            case MODE_LEFT_OUT:
+                path = getModeLeftOutPath(path, w, h);
+                break;
         }
         path.close();
         canvas.drawPath(path, mPaint);
         canvas.save();
+    }
+
+    /**
+     * 立体的tag
+     *
+     * @param path
+     * @param w
+     * @param h
+     * @return
+     */
+    private Path getModeLeftOutPath(Path path, int w, int h) {
+        path.moveTo(w - mOutLength, 0);
+        path.lineTo(w, mOutLength);
+        path.lineTo(w - mOutLength * 2, mOutLength);
+        path.lineTo(mOutLength, h - mOutLength * 2);
+        path.lineTo(mOutLength, h);
+        path.lineTo(0, h - mOutLength);
+        path.lineTo(0, h - mSlantedLength);
+        path.lineTo(w - mSlantedLength, 0);
+        return path;
     }
 
     private Path getModeLeftPath(Path path, int w, int h) {
@@ -213,6 +241,7 @@ public class SlantedTextView extends View {
         switch (mMode) {
             case MODE_LEFT_TRIANGLE:
             case MODE_LEFT:
+            case MODE_LEFT_OUT:
                 rect = new Rect(0, 0, w, h);
                 rectF = new RectF(rect);
                 rectF.right = mTextPaint.measureText(mSlantedText, 0, mSlantedText.length());

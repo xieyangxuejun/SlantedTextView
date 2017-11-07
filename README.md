@@ -3,6 +3,8 @@
 Android slanted TextView . [中文版](https://github.com/HeZaiJin/SlantedTextView/blob/master/README-cn.md)
 ## Preview
 ![预览](https://github.com/HeZaiJin/SlantedTextView/blob/master/screen_shot/screenshot.png)
+### 2017-11-8
+![newTag](https://github.com/xieyangxuejun/SlantedTextView/blob/master/screen_shot/QQ20171107-0.jpg)
 ## Gradle
 ```java
 compile 'com.haozhang.libary:android-slanted-textview:1.2'
@@ -36,6 +38,7 @@ compile 'com.haozhang.libary:android-slanted-textview:1.2'
 ![注意](https://github.com/HeZaiJin/SlantedTextView/blob/master/screen_shot/note.png)
 ## SlantedMode
 ![SlantedMode](https://github.com/HeZaiJin/SlantedTextView/blob/master/screen_shot/slanted_mode.png)
+
 # License
 ```
 Copyright 2016 Hand HaoZhang
